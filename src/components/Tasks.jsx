@@ -1,7 +1,7 @@
 import { IoCheckbox } from "react-icons/io5";
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Tasks = ({ setModal, allTask, setAllTask }) => {
 
@@ -10,33 +10,56 @@ const Tasks = ({ setModal, allTask, setAllTask }) => {
     const [deleteUpcomingTaskIDX, setDeleteUpcomingTaskIDX] = useState(null);
     const [deleteCompletedTaskIDX, setDeleteCompletedTaskIDX] = useState(null);
 
+    useEffect(() => {
+        const completedTasksFromLocalStorage = JSON.parse(localStorage.getItem('completedTasks'));
+        if (completedTasksFromLocalStorage) {
+            setCompletedTasks(completedTasksFromLocalStorage);
+        }
+    }, []); 
+
+    const saveToLocalStorage = (key, data) => {
+        localStorage.setItem(key, JSON.stringify(data));
+    };
+
     const checkTaskHandler = (id) => {
-        const checkedTask = allTask?.find((task) => task.id === id);
+        const checkedTask = allTask.find((task) => task.id === id);
         setCompletedTasks((prev) => [...prev, checkedTask]);
         setAllTask((prevTasks) => prevTasks.filter((task) => task.id !== id));
+
+        saveToLocalStorage('tasks', allTask);
+        saveToLocalStorage('completedTasks', [...completedTasks, checkedTask]);
     };
 
     const uncheckTaskHandler = (id) => {
         const uncheckedTask = completedTasks.find((task) => task.id === id);
         setCompletedTasks((prev) => prev.filter((task) => task.id !== id));
         setAllTask((prev) => [...prev, uncheckedTask]);
+
+        saveToLocalStorage('tasks', allTask);
+        saveToLocalStorage('completedTasks', completedTasks.filter((task) => task.id !== id));
     };
-    
 
     const deleteTask = (taskId) => {
         setAllTask(prevTasks => prevTasks.filter(task => task.id !== taskId));
-        selectedTaskIndex(null)
+        setSelectedTaskIndex(null);
+
+        saveToLocalStorage('tasks', allTask);
     };
 
     const deleteCompletedTask = (taskId) => {
         setCompletedTasks(prevTasks => prevTasks.filter(task => task.id !== taskId));
-        setDeleteCompletedTaskIDX(null)
+        setDeleteCompletedTaskIDX(null);
+
+        saveToLocalStorage('completedTasks', completedTasks.filter((task) => task.id !== taskId));
     };
 
     const deleteUpcomingTask = (taskId) => {
         setAllTask(prevTasks => prevTasks.filter(task => task.id !== taskId));
-        setDeleteUpcomingTaskIDX(null)
+        setDeleteUpcomingTaskIDX(null);
+
+        saveToLocalStorage('tasks', allTask);
     };
+
 
    
 
@@ -378,7 +401,7 @@ const Tasks = ({ setModal, allTask, setAllTask }) => {
                         </div>)
 
                     :
-                    <p className="text-center text-gray-400">No Completed Task </p>
+                    <p className="text-center my-3 text-gray-400">No Completed Task </p>
                 }
 
 

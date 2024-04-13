@@ -3,7 +3,7 @@ import profileImg from "../assets/profile.png";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import Tasks from "./Tasks";
 import AddTaskModal from "./AddTaskModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaBarsStaggered } from "react-icons/fa6";
 
 
@@ -11,8 +11,11 @@ import { FaBarsStaggered } from "react-icons/fa6";
 const Dashboard = () => {
     const [modal, setModal] = useState(false);
     const [show, setShow] = useState(false);
-    const [allTask, setAllTask] = useState([]);
-
+    const [allTask, setAllTask] = useState(() => {
+        const tasks = JSON.parse(localStorage.getItem('tasks'));
+        return tasks ? tasks : [];
+    });
+    
     const [currentTask, setCurrentTask] = useState({
         taskName: '',
         date: '',
@@ -20,6 +23,16 @@ const Dashboard = () => {
     });
 
 
+    function saveToLocalStorage(key, data) {
+        localStorage.setItem(key, JSON.stringify(data));
+    };
+
+    useEffect(() => {
+        const tasks = JSON.parse(localStorage.getItem('tasks'));
+        if (tasks) {
+            setAllTask(tasks);
+        }
+    }, []); 
 
     function hadleCreateTask(e) {
         e.preventDefault();
@@ -82,17 +95,21 @@ const Dashboard = () => {
         };
     
         setAllTask((pr) => ([...pr, newTask]));
+
+
         setCurrentTask({
             taskName: '',
             date: '',
             tags: [],
         });
         setModal(false);
+
     }
     
-
-// console.log(allTask);
-
+    useEffect(() => {
+        saveToLocalStorage('tasks', allTask);
+    }, [allTask]);
+    
     return (
         <div className="flex items-start w-full">
             <div className="inline-block h-screen w-fit">

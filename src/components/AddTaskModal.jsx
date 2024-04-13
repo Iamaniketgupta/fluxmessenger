@@ -2,11 +2,6 @@ import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 
 const AddTaskModal = ({ modal, setModal, currentTask, setCurrentTask, hadleCreateTask }) => {
-    // const [selectedTag,setSelectedTag] =useState()
-    const [allPlannedTask, setAllPlannedTask] = useState([]);
-    const [allUpcomingTask, setAllUpcomingTask] = useState([]);
-    const [completedTask, setCompletedTask] = useState([]);
-
 
     function handleTags(value) {
 
@@ -16,10 +11,7 @@ const AddTaskModal = ({ modal, setModal, currentTask, setCurrentTask, hadleCreat
             setCurrentTask((p) => ({ ...p, tags: [...p.tags].filter((i) => i !== value) }))
 
     }
-
-
-
-
+    
     return (
         modal && <form onSubmit={
             (e) => hadleCreateTask(e)
