@@ -143,7 +143,7 @@ const Tasks = ({ setModal, allTask, setAllTask }) => {
                         </div>
                     )
                     :
-                    <p className="text-center text-gray-300">No Task Found</p>
+                    <p className="text-center text-gray-400">No Task Found</p>
                 }
 
 
@@ -263,7 +263,7 @@ const Tasks = ({ setModal, allTask, setAllTask }) => {
                         </div>)
 
                     :
-                    <p className="text-center text-gray-300">No Task Found</p>
+                    <p className="text-center text-gray-400">No Task Found</p>
                 }
 
 
@@ -378,7 +378,7 @@ const Tasks = ({ setModal, allTask, setAllTask }) => {
                         </div>)
 
                     :
-                    <p className="text-center text-gray-300">No Completed Task </p>
+                    <p className="text-center text-gray-400">No Completed Task </p>
                 }
 
 
