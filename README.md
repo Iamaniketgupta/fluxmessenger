@@ -1,8 +1,11 @@
-# React + Vite
+## Go Live : https://fluxmessenger.vercel.app/
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Screen Shots
+![image](https://github.com/Iamaniketgupta/fluxmessenger/assets/115345548/07e6bea5-f123-44a0-8f34-88db95970541)
 
-Currently, two official plugins are available:
+![image](https://github.com/Iamaniketgupta/fluxmessenger/assets/115345548/dde59b79-ceb2-4475-9482-e8c781141f4e)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![image](https://github.com/Iamaniketgupta/fluxmessenger/assets/115345548/c1d6b11e-b540-488a-bfe9-a75d12c04723)
+
+![image](https://github.com/Iamaniketgupta/fluxmessenger/assets/115345548/82366032-2240-48ee-bb59-241523245f74)
+
